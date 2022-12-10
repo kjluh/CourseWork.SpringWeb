@@ -25,7 +25,7 @@ public class ExaminerServiceImpl implements ExaminerService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Запрошено слишком большое количество элементов, " +
                     "максимальное: " + javaQuestionService.getAll().size());
         }
-        while (questions.size() < size) {
+        while (size > questions.size()) {
             questions.add(javaQuestionService.getRandomQuestion());
         }
         return questions;

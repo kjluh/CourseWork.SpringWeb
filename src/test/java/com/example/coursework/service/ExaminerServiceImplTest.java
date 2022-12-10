@@ -23,19 +23,20 @@ public class ExaminerServiceImplTest {
     @InjectMocks
     ExaminerServiceImpl examinerService;
 
-    private HashSet<Question> example=new HashSet<>();
+    private HashSet<Question> example = new HashSet<>();
     Question q1 = new Question("test1", "test11");
     Question q2 = new Question("test2", "test12");
 
     @BeforeEach
     public void setUp() {
         example.add(q1);
-//        example.add(q2);
-        Mockito.when(javaQuestionService.getRandomQuestion()).thenReturn(q1);
+        example.add(q2);
+        Mockito.when(javaQuestionService.getRandomQuestion()).thenReturn(q1, q2);
+        Mockito.when(javaQuestionService.getAll()).thenReturn(example);
     }
 
     @Test
     public void getQuestions() {
-        Assertions.assertEquals(examinerService.getQuestions(1), example);
+        Assertions.assertEquals(examinerService.getQuestions(2), example);
     }
 }
