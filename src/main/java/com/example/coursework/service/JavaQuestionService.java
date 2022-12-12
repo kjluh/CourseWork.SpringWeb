@@ -14,8 +14,6 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question add(String question, String answer) {
-//        excep(question);
-//        excep(answer);
         Question quest = new Question(question, answer);
         questionMap.add(quest);
         return quest;
@@ -23,14 +21,12 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question add(Question question) {
-//        excep(question);
         questionMap.add(question);
         return question;
     }
 
     @Override
     public Question remove(Question question) {
-//        excep(question);
         questionMap.remove(question);
         return question;
     }
@@ -44,14 +40,7 @@ public class JavaQuestionService implements QuestionService {
     public Question getRandomQuestion() {
         Random random = new Random();
         int x = random.nextInt(questionMap.size());
-        List list = new ArrayList<>();
-        list.addAll(questionMap);
-        return (Question) list.get(x);
+        List<Question> list = new ArrayList<>(questionMap);
+        return list.get(x);
     }
-
-//    public void excep(Object s) {
-//        if (s == null) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ввели не все данные");
-//        }
-//    }
 }

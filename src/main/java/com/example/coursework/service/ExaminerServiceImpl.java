@@ -20,7 +20,7 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     @Override
     public Collection<Question> getQuestions(int size) {
-        HashSet<Question> questions = new HashSet<>(1);
+        HashSet<Question> questions = new HashSet<>();
         if (size > javaQuestionService.getAll().size()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Запрошено слишком большое количество элементов, " +
                     "максимальное: " + javaQuestionService.getAll().size());

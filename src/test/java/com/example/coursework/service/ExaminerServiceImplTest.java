@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -27,16 +28,18 @@ public class ExaminerServiceImplTest {
     Question q1 = new Question("test1", "test11");
     Question q2 = new Question("test2", "test12");
 
-    @BeforeEach
-    public void setUp() {
+
+    @Test
+    public void getQuestions() {
         example.add(q1);
         example.add(q2);
         Mockito.when(javaQuestionService.getRandomQuestion()).thenReturn(q1, q2);
         Mockito.when(javaQuestionService.getAll()).thenReturn(example);
+        Assertions.assertEquals(examinerService.getQuestions(2), example);
     }
 
     @Test
-    public void getQuestions() {
-        Assertions.assertEquals(examinerService.getQuestions(2), example);
+    public void getQuestionsException() {
+        Assertions.assertThrows(ResponseStatusException.class, () -> examinerService.getQuestions(3));
     }
 }
