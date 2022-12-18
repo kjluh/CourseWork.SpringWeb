@@ -1,46 +1,45 @@
 package com.example.coursework.service;
 
 import com.example.coursework.model.Question;
-import org.springframework.http.HttpStatus;
+import com.example.coursework.repository.JavaQuestionRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
 @Service
 public class JavaQuestionService implements QuestionService {
-    private Set<Question> questionMap = new HashSet<>();
 
+    JavaQuestionRepository javaQuestionRepository;
+
+    public JavaQuestionService(JavaQuestionRepository javaQuestionRepository) {
+        this.javaQuestionRepository = javaQuestionRepository;
+    }
 
     @Override
-    public Question add(String question, String answer) {
-        Question quest = new Question(question, answer);
-        questionMap.add(quest);
-        return quest;
+    public Question add(Object question, Object answer) {
+        return javaQuestionRepository.add(question, answer);
     }
 
     @Override
     public Question add(Question question) {
-        questionMap.add(question);
-        return question;
+        return javaQuestionRepository.add(question);
     }
 
     @Override
     public Question remove(Question question) {
-        questionMap.remove(question);
-        return question;
+        return javaQuestionRepository.remove(question);
     }
 
     @Override
     public Set<Question> getAll() {
-        return questionMap;
+        return javaQuestionRepository.getAll();
     }
 
     @Override
     public Question getRandomQuestion() {
         Random random = new Random();
-        int x = random.nextInt(questionMap.size());
-        List<Question> list = new ArrayList<>(questionMap);
+        int x = random.nextInt(javaQuestionRepository.getAll().size());
+        List<Question> list = new ArrayList<>(javaQuestionRepository.getAll());
         return list.get(x);
     }
 }

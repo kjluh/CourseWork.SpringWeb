@@ -3,19 +3,19 @@ package com.example.coursework.model;
 import java.util.Objects;
 
 public class Question {
-    private final String question;
-    private final String answer;
+    private final Object question;
+    private final Object answer;
 
-    public Question(String question, String answer) {
+    public Question(Object question, Object answer) {
         this.question = question;
         this.answer = answer;
     }
 
-    public String getQuestion() {
+    public Object getQuestion() {
         return question;
     }
 
-    public String getAnswer() {
+    public Object getAnswer() {
         return answer;
     }
 
